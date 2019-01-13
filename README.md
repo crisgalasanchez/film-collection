@@ -1,4 +1,6 @@
-# ![React](logo.png)
+<a href="https://reactjs.org/"><img src="/logo.png" title="React" alt="React"></a>
+
+# ![React]
 
 
 ##  Description
@@ -8,7 +10,7 @@ Adding favorite movies in the localStorage and login users and storage in sessio
 
 ##  Installation
 
-- Clone the repo in your terminal.
+- Clone the repository in your terminal.You will need node and npm installed globally
 - In your terminal, type ```git clone URL```
   - replace URL with the url you copied
   - hit enter
