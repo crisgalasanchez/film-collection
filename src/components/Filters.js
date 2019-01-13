@@ -9,16 +9,15 @@ class Filters extends Component {
         } = this.props;
 
         return (
-            <div>
-                <label htmlFor="filmSearch" />
+            <div className="container__filter">
                 <input
                     id="filmSearch"
                     type="text"
                     title="filmName"
                     onChange={handleSearch}
                     value={searchValue}
-                    placeholder="Filter film by name..."
-                    className="inputFilter"/>
+                    placeholder="Filter movie by name..."
+                    className="form-control input__filter"/>
             </div>
         );
     };

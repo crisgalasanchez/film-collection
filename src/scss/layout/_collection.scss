@@ -1,0 +1,27 @@
+
+.list__names {
+  list-style: none;
+  padding: 0;
+  justify-content: center; 
+}
+
+.list__film {
+  width: 260px;
+  border: 1px solid grey;
+  margin: 10px;
+  box-shadow: 5px 5px 5px #888888;
+  transition: scale ease 1s; 
+  &:hover{
+    transform:scale(1.1);
+  } 
+}
+
+.container__link {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.icon__link {
+  width: 50px;
+  height: 50px; 
+}

@@ -1,0 +1,56 @@
+body {
+    font-family: 'Dosis', sans-serif;
+    padding: 20px;
+    background: linear-gradient(-45deg, #e8bebe, #b94949, #ff1e1e);
+    background-size: 400% 400%;
+      -webkit-animation: Gradient 10s ease infinite;
+      -moz-animation: Gradient 10s ease infinite;
+    animation: Gradient 10s ease infinite;
+  }
+  
+  @-webkit-keyframes Gradient {
+      0% {
+          background-position: 0% 50%
+      }
+      50% {
+          background-position: 100% 50%
+      }
+      100% {
+          background-position: 0% 50%
+      }
+  }
+  
+  @-moz-keyframes Gradient {
+      0% {
+          background-position: 0% 50%
+      }
+      50% {
+          background-position: 100% 50%
+      }
+      100% {
+          background-position: 0% 50%
+      }
+  }
+  
+  @keyframes Gradient {
+      0% {
+          background-position: 0% 50%
+      }
+      50% {
+          background-position: 100% 50%
+      }
+      100% {
+          background-position: 0% 50%
+      }
+  }
+  
+.main{
+    margin-top: 180px;
+    @media all and (min-width: 770px){
+        margin-top: 150px;
+    }
+}
+
+ul{
+    list-style: none;
+}

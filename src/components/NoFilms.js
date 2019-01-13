@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import NoFilm from '../images/noFilm.jpg';
+import NoFilm from '../images/nofilm.jpg';
 
 class NoFilms extends Component {
     render() { 
         return ( 
-            <div className="noFilmsContainer">
-                <img className="catchFilm" 
-                src={NoFilm} 
-                alt="No films to show"/>
-                <h1 className="noFilmsMessage">No films to show {this.props.searchValue}...</h1>
-                <h2 className="noFilmsMessage2">Catch it!</h2>
+            <div className="card bg-dark text-white mx-5 main">
+                <img className="card-img rounded"
+                    src={NoFilm} 
+                    alt="No films to show"/>
+                <div>    
+                    <h3 className="card-title text-center">No films to show...</h3>
+                </div>
             </div>
          );
     }

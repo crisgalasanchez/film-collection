@@ -5,15 +5,27 @@ import PropTypes from 'prop-types';
 
 class Collection extends Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            favoriteHandler : this.props.favoriteHandler,
+            favoriteList : this.props.favoriteList,
+        };
+    };
+
     render() {
         const { filmList, searchValue} = this.props;
         return filmList.length !== 0
-        ?  <div className="container__film">  
+        ?  <div className="container container__film">  
                 <ul className="row list__names">{
                         filmList.map((film) =>{
                             return( 
-                        <li className="col-lg-4 col-sm-6 col-xs-12 list__film" key={film.imdbID}>
-                                    <Card film={film} />
+                                <li className="col-xl-3 card list__film" key={film.imdbID}>
+                                    <Card 
+                                        film={film} 
+                                        favoriteHandler={this.state.favoriteHandler}
+                                        favoriteList={this.state.favoriteList}
+                                    />
                                 </li>
                             );
                         })

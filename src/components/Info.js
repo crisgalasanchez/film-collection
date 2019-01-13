@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import PlayFilm from '../images/playfilm.jpg';
-// import { CSSTransitionGroup } from 'react-transition-group'
+import Loading from "./Loading";
 
 class Info extends Component {
     constructor(props) {
@@ -10,14 +10,8 @@ class Info extends Component {
             filmId: this.props.match.params.imdbID,
             filmInfo: {}
         } ;
-
-        this.setFilmInfo = this.setFilmInfo.bind(this);
     };
-    setFilmInfo(json){
-        this.setState({
-            filmInfo:json
-        });
-    }
+   
     componentDidMount() { 
         let id = this.props.match.params.imdbID;
         const URL = 'http://www.omdbapi.com/?apikey=f12ba140&i=';
@@ -29,81 +23,59 @@ class Info extends Component {
             });
         });
     };
+    
     render (){
         return(this.state.filmInfo.Title !== undefined
-        ?  <div className="filmDataContainer">
-                <div className="filmCardDetail">
-                    <div className="filmNameContainer">
-                        <h1 className="titlefilm">{this.state.filmInfo.Title}</h1>
-                    </div>
-                    <div className="photoAndDataContainer">
-                        <div className="photoAndTypeContainer">
-                            <div className="photoContainerDetail">
-                                <img src={this.state.filmInfo.Poster} alt={this.state.filmInfo.Title} />
-
-                                {/* <CSSTransitionGroup
-                                    transitionName="filmTransition"
-                                    transitionAppear={true}
-                                    transitionAppearTimeout={1000}
-                                    transitionLeaveTimeout={false}>
-                                    ////
-                                </CSSTransitionGroup> */}
-                            </div>
+        ?  <div className="container__data">
+                <div className="container__data--card d-flex flex-column">
+                    <h3 className="card-title">{this.state.filmInfo.Title} ({this.state.filmInfo.Year})</h3>
+                    <div className="d-flex flex-column flex-md-row">
+                        <div className="p-2">
+                                { this.state.filmInfo.Poster === 'N/A' 
+                                    ? <img className='card-img-top image mx-auto d-block' src='https://via.placeholder.com/210x295/cccccc/666666/?text=TV' alt={this.state.filmInfo.Title}/>
+                                    : <img className='card-img-top image mx-auto d-block' src={this.state.filmInfo.Poster} alt={this.state.filmInfo.Title}/>
+                                }
+                            <h6 className="font-weight-bold text-center pt-2">✪ Rating: {this.state.filmInfo.imdbRating}</h6>
                         </div>
-                    </div>  
-
-                    <div className="allDataContainer">
-                        <h2 className="dataInfoDetail">Characteristics</h2>
-                        {/* <CSSTransitionGroup
-                            transitionName="filmInfoTransition"
-                            transitionAppear={true}
-                            transitionAppearTimeout={1500}>
-                            //
-                        </CSSTransitionGroup> */}
-                        <ul className="listCharacteristicsDetails">
-                            <li>
-                                <h3 className="characteristicInfo">Year:</h3>
-                                <h3 className="characteristicData">{this.state.filmInfo.Year}</h3>
-                            </li>
-                            <li>
-                                <h3 className="characteristicInfo">Director:</h3>
-                                <p className="characteristicData">{this.state.filmInfo.Director}</p>
-                            </li>
-                            <li>
-                                <h3 className="characteristicInfo">Language:</h3>
-                                <p className="characteristicData">{this.state.filmInfo.Language}</p>
-                            </li>
-                            <li>
-                                <h3 className="characteristicInfo">Genre:</h3>
-                                <p className="characteristicData">{this.state.filmInfo.Genre}</p>
-                            </li>
-                        </ul>
+                        <div className="p-2">
+                            <ul className="d-flex flex-column">
+                                <li className="d-flex justify-content">
+                                    <h5 className="mr-2">Director: </h5>
+                                    <p className="font-italic"> {this.state.filmInfo.Director}</p>
+                                </li>
+                                <li className="d-flex justify-content">
+                                    <h5 className="mr-2">Actors: </h5>
+                                    <p className="font-italic"> {this.state.filmInfo.Actors}</p>
+                                </li >
+                                <li className="d-flex justify-content">
+                                    <h5 className="mr-2">Duration: </h5>
+                                    <p className="font-italic"> {this.state.filmInfo.Runtime}</p>
+                                </li >
+                                <li className="d-flex justify-content">
+                                    <h5 className="mr-2">Language: </h5>
+                                    <p className="font-italic"> {this.state.filmInfo.Language}</p>
+                                </li>
+                                <li className="d-flex justify-content">
+                                    <h5 className="mr-2">Genre: </h5>
+                                    <p className="font-italic"> {this.state.filmInfo.Genre}</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div>
-                        <h2 className="bigTitle">Plot</h2>
-                        <p className="characteristicData">{this.state.filmInfo.Plot}</p>
-                        {/* <CSSTransitionGroup
-                            transitionName="filmPlotTransition"
-                            transitionAppear={true}
-                            transitionAppearTimeout={2500}
-                        >
-                            ///
-                        </CSSTransitionGroup> */}
+                    <div className="card-body card__plot">
+                        <h2 className="card-subtitle pb-2">Plot</h2>
+                        <p className="card-text text-justify">{this.state.filmInfo.Plot}</p>
                     </div>
-                    <div className="containerButtonBackDetail">
+                    <div className="d-flex justify-content-around align-items-center">
                         <Link
-                            className="linkToLanding"
                             to={'/'}>
-                            <button className="buttonBack">Back to films</button>
-                            
+                            <button className="btn btn-dark">Back to films</button>
                         </Link>
-                        <a title={this.state.filmInfo.Title} href={this.state.filmInfo.Website} about="_blank"><img src={PlayFilm}alt="Watch tv" /></a>
+                        <a title={this.state.filmInfo.Title} href={this.state.filmInfo.Website} about="_blank" alt= "Watch movie"><img className="icon__film" src={PlayFilm} alt="Watch video" /></a>
                     </div>
                 </div> 
             </div>
-        :   <div>
-                Loading
-            </div>
+        :  <Loading/> 
         )
     };
 }

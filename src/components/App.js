@@ -1,47 +1,51 @@
 import React, { Component } from "react";
-/* import Main from "./Main";*/
 import Info from "./Info";
+import Header from "./Header";
 import Collection from "./Collection";
 import { Route, Switch } from "react-router-dom"; 
-
 import Filters from './Filters.js';
-
+import NoFilms from './NoFilms.js';
+import Nav from './Nav.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filmList: [],
-      filteredList: [],
-      //filmInfoSelected:{},
-      searchValue: ""
+      favoriteList: [],
+      filmData:{},
+      searchValue: "",
+      logged : false
     };
 
     this.callApi = this.callApi.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    // this.selectListToPrint = this.selectListToPrint.bind(this);
-    // this.saveDataInState = this.saveDataInState.bind(this);
-    // this.saveDataInLocalStorage = this.saveDataInLocalStorage.bind(this);
-    // this.addFavourite = this.addFavourite.bind(this);
+    this.updateLocalStorage = this.updateLocalStorage.bind(this);
+    this.addInLocalStorage = this.addInLocalStorage.bind(this);
+    this.removeInLocalStorage = this.removeInLocalStorage.bind(this);
+    this.updateLoginState = this.updateLoginState.bind(this);
   }
-
-  //1. Rescatar datos de LS (si hay) o preparar llamada a la API
-
-  /*componentDidMount() { 
-     const listFromLocalStorage = JSON.parse(localStorage.getItem("film-list"));
-     if (listFromLocalStorage.length > 0) {
-      console.log("LS");
-      this.setState({ 
-        filmList: listFromLocalStorage
-      });
-    } else {
-      this.callApi();
-    };  
-    
-  };*/
   
-  // 2. Llamada a la API y construcción de objeto con datos.
+  componentWillMount() { 
+    //users to mock sessionStorage
+    sessionStorage.setItem('users', JSON.stringify({
+      'lola@gmail.com':'lola',
+      'maria@gmail.com':'maria',
+      'ana@gmail.com':'ana'
+    }));
+  };
+  // Rescatar datos de LS (si hay) o preparar llamada a la API
 
+  componentDidMount() { 
+    let user = sessionStorage.getItem('userLogged');
+    const listFromLocalStorage = JSON.parse(localStorage.getItem(user));
+    if (listFromLocalStorage !==  null) {
+      this.setState({ 
+        favoriteList: listFromLocalStorage
+      });
+    }
+  };
+  
   callApi(search) {
     const URL = 'http://www.omdbapi.com/?apikey=f12ba140&s=';
     fetch(`${URL}${search}&type=movie`)
@@ -54,77 +58,129 @@ class App extends Component {
           }); 
         }else{
           this.setState({
-            searchValue : search
+            searchValue : search,
+            filmList: []
           }); 
         }
     });
   }
-  //3. Meter datos de la API en el estado
-
- /*  saveDataInState() {
-    this.setState({
-        filmList: arrayFilms
-      },
-      this.saveDataInLocalStorage()
-    );
-  } */
-
-  //4. Guardar datos en el Local Storage
-
-/*   saveDataInLocalStorage() {
-    localStorage.setItem("film-list", JSON.stringify(arrayFilms));
+  
+  //Save data in Local Storage
+  updateLocalStorage(action, id) {
+    if(action === 'remove'){
+      this.removeInLocalStorage(id);
+    }else{
+      this.state.filmList.map((film) =>{
+        if(film.imdbID === id){
+          this.addInLocalStorage(film);        
+        }
+      });
+    }
+    //localStorage.setItem("favorite-list", JSON.stringify(this.state.filmList));
   }
- */
-  //5. Controlar el evento del input: cuando escribes, se filtra la lista inicial y los filtrados se meten en el array filteredList del estado.
 
+  addInLocalStorage(film){
+    let list;
+    let user = sessionStorage.getItem('userLogged');
+    if(localStorage.getItem(user) !== null){
+      list = JSON.parse(localStorage.getItem(user));
+    }else{
+      list = [];
+    }
+    list.push(film);
+    localStorage.setItem(user, JSON.stringify(list));
+  }
+ 
+  removeInLocalStorage(id){
+    let user = sessionStorage.getItem('userLogged');
+    let list = JSON.parse(localStorage.getItem(user));
+    list.map((film, index) =>{
+      if(film.imdbID === id){
+        list.splice(index, 1);
+      }
+    });
+    localStorage.setItem(user, JSON.stringify(list));
+  }
+
+  updateLoginState(state){
+    if(this.logged != state){
+      this.setState({
+        logged : state
+      });
+    }
+  }
+
+  /* // select the correct list
+  selectListToPrint() {
+    const { favoriteList, filmList, searchValue } = this.state;
+    return !searchValue ? filmList : favoriteList;
+  } 
+ // this.props.isFavorite?" active":""
+ createArray(filmData){
+  const { counter, filmList } = this.state;
+  filmList[counter] = filmData;
+  this.saveDataInLocalStorage(filmList);
+}
+
+ */
+  //Input value event and filter favorite
   handleSearch(e) {
     let search = e.target.value.toLowerCase();
-    // this.setState({
-    //   searchValue: search,
-    //   filteredList: this.state.filmList.filter(film => {
-    //     return film.Title.includes(search);
-    //   })
-    // });
     if (search !== "") {
       this.callApi(search)
-    } 
-   
+    }else{
+      this.setState({
+        searchValue: search
+      });
+    }
   }
 
-  //6. Seleccionar la listaque renderizar: la inicial o la filtrada
-
-/*   selectListToPrint() {
-    const { filteredList, filmList, searchValue } = this.state;
-    return !searchValue ? filmList : filteredList;
-  } */
- 
   render() {
-   
-   
     return (
       <Switch>
         <Route exact path="/"
-          render={() => {
-            /*return this.state.filmList.length > 0 
-            ? <Main
-                handleSearch={this.handleSearch}
-                filmList={this.selectListToPrint}
-                searchValue={this.state.searchValue}
-              /> 
-            : <Loading />;*/
-            
+          render={() => { 
             return this.state.filmList.length !== 0
             ? <div>
+              <Header updateLoginState={this.updateLoginState}/> 
+              <Nav/> 
               <Filters 
                 handleSearch={this.handleSearch}
                 searchValue={this.state.searchValue}/>
               <Collection
-                 filmList={this.state.filmList}
+                filmList={this.state.filmList}
+                favoriteHandler={this.updateLocalStorage}
+                favoriteList={this.state.favoriteList}
+                />
+              </div>
+            : <div>
+                <Header updateLoginState={this.updateLoginState}/> 
+                <Nav/> 
+                <Filters 
+                    handleSearch={this.handleSearch}
+                    searchValue={this.state.searchValue}/>
+              </div>
+                    
+          }}
+        />
+        <Route exact path="/favorite"
+          render={() => { 
+            return this.state.favoriteList.length !== 0
+            ? <div>
+              <Header updateLoginState={this.updateLoginState}/> 
+              <Nav/> 
+              <Collection
+                 filmList={this.state.favoriteList}
+                 favoriteHandler={this.updateLocalStorage}
+                 favoriteList={this.state.favoriteList}
                 /> 
               </div>
-            : <Filters 
-                handleSearch={this.handleSearch}
-                searchValue={this.state.searchValue}/>
+            : <div>
+                <Header updateLoginState={this.updateLoginState}/> 
+                <Nav/> 
+                <NoFilms/> 
+              </div>
+                    
           }}
         />
         <Route path="/film/:imdbID"
