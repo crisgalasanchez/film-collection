@@ -48,7 +48,7 @@ class Header extends Component {
     let logoutButton = document.getElementById('logoutButton');
     let userLogged = sessionStorage.getItem('userLogged');
     let userName = document.getElementById('userName');
-    userName.classList.add('d-block');
+    this.showElement(userName);
     userName.innerHTML=userLogged;
     this.showElement(logoutButton);
     let user = document.getElementById('inputEmail');
@@ -70,7 +70,7 @@ class Header extends Component {
     let logoutButton = document.getElementById('logoutButton');
     this.hideElement(logoutButton);
     let userName = document.getElementById('userName');
-    userName.classList.remove('d-block');
+    this.hideElement(userName);
     let user = document.getElementById('inputEmail');
     this.showElement(user);
     let password = document.getElementById('inputPassword');
@@ -119,12 +119,12 @@ class Header extends Component {
               to={'/'}>
               <img className="icon__film" src={PlayFilm} alt="Home" />
             </Link>
-            <h1 className="main__title pl-3 pt-3">Find your movie...</h1>
+            <h1 className="main__title pl-3">Find your movie...</h1>
           </div>
           <div className="d-flex flex-column">
             <form className="form-inline mt-sm-1">
               <div className="form-group mx-sm-3 mb-2">
-                <p class="font-weight-bold mb-1" id="userName"></p>
+                <p class="font-weight-bold mb-1 d-block" id="userName"></p>
                 <input type="text" className="form-control mb-2 mb-sm-0 mr-sm-2  input__login d-block" id="inputEmail" placeholder="Username"/>
                 <input type="password" className="form-control input__login d-block" id="inputPassword" placeholder="Password"></input>
               </div>

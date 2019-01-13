@@ -1,19 +1,18 @@
 .container__data{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ef4d4d;
-    padding-top: 5%;
-    padding-bottom: 5%;
-  }
-  
-  .container__data--card{
-    background-color: #e0d8e3;
-    width: 85%;
-    max-width: 700px;
-    padding: 25px;
-    box-shadow: 5px 5px 5px #888888;
-  }
-  .card__plot{
-    background-color: #e0d8e3;
-  }
+  @include absoluteCentered();
+  justify-content: center;
+  background-color: $colorContainer;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.container__data--card{
+  background-color: $colorBackground;
+  width: 85%;
+  max-width: 700px;
+  padding: 25px;
+  box-shadow: 5px 5px 5px #888888;
+}
+.card__plot{
+  background-color:$colorBackground;
+}

@@ -1,11 +1,21 @@
-
 .header {
-  width: 100%;
+  width: $sizeWidth;
+  background-color:$colorBackground;
   position: fixed;
-  top: 0;
-  left: 0;
-  padding: 15px;
+  top: $sizeNull;
+  left: $sizeNull;
+  padding: 15px 10px 0px 10px;
   z-index: 2;
+  @media all and (min-width: 770px){
+    padding: 15px 15px 0px 15px;
+  }
+}
+.main__title{
+  font-family: $fontRest;
+  font-size: 1.7em;
+  @media all and (min-width: 770px){
+    font-size: 1.9em;
+  }
 }
 .input__login{
   &:focus {
@@ -13,17 +23,15 @@
     box-shadow: 0 0 0 0.2rem rgba(232, 62, 62, 0.25);
   }
 }
-
-.icon__film{
-  height: 80px;
-}
-
-.main__title{
-    font-family: 'Aclonica', sans-serif;
-    font-size: 1.7em;
-    @media all and (min-width: 770px){
-      font-size: 2.2em;
-    }
+.main{
+  margin-top: 220px;
+  @media all and (min-width: 570px){
+    margin-top: 180px;
   }
-
- 
+  @media all and (min-width: 768px){
+    margin-top: 135px;
+  }
+}
+.icon__film{
+  width: 70px;
+}

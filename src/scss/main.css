@@ -1,28 +1,6 @@
-/* 
-// Core
-@import 'core/mixins';
-@import 'core/variables';
-
-
-// Layout
-@import 'layout/header';
-@import 'layout/filters';
-@import 'layout/collection';
-@import 'layout/card';
-@import 'layout/info';
-@import 'layout/footer';
-
-// Components
-@import 'components/typography'; 
-
-// Page
-@import 'pages/home'; 
-
- */
 @import url("https://fonts.googleapis.com/css?family=Dosis");
 @import url("https://fonts.googleapis.com/css?family=Aclonica");
 body {
-  font-family: 'Dosis', sans-serif;
   padding: 20px;
   background: linear-gradient(-45deg, #e8bebe, #b94949, #ff1e1e);
   background-size: 400% 400%;
@@ -63,14 +41,14 @@ ul {
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 15px;
+  padding: 15px 10px 0px 10px;
   z-index: 2; }
   @media all and (min-width: 770px) {
     .header {
       padding: 15px 15px 0px 15px; } }
 
 .main__title {
-  font-family: 'Aclonica', sans-serif;
+  font-family: "Aclonica", sans-serif;
   font-size: 1.7em; }
   @media all and (min-width: 770px) {
     .main__title {
@@ -91,6 +69,24 @@ ul {
 
 .icon__film {
   width: 70px; }
+
+.container__filter {
+  text-align: center;
+  padding: 0% 10%; }
+  @media all and (min-width: 390px) {
+    .container__filter {
+      display: flex;
+      align-items: center;
+      flex-direction: column; } }
+
+.input__filter {
+  width: 50%;
+  margin: 5%;
+  outline: none;
+  border: none; }
+  .input__filter:focus {
+    border-color: #c1bdbd;
+    box-shadow: 0 0 0 0.3rem rgba(27, 26, 26, 0.25); }
 
 .users {
   display: none; }
@@ -152,28 +148,10 @@ ul {
 .active {
   color: #e71d36; }
 
-.container__filter {
-  text-align: center;
-  padding: 0% 10%; }
-  @media all and (min-width: 390px) {
-    .container__filter {
-      display: flex;
-      flex-direction: column;
-      align-items: center; } }
-
-.input__filter {
-  width: 50%;
-  margin: 5%;
-  outline: none;
-  border: none; }
-  .input__filter:focus {
-    border-color: #c1bdbd;
-    box-shadow: 0 0 0 0.3rem rgba(27, 26, 26, 0.25); }
-
 .container__data {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: #ef4d4d;
   padding-top: 5%;
   padding-bottom: 5%; }

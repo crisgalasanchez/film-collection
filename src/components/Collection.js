@@ -8,11 +8,12 @@ class Collection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            favoriteHandler : this.props.favoriteHandler
+            favoriteHandler : this.props.favoriteHandler,
+            favoriteList : this.props.favoriteList
         };
     };
     render() {
-        const { filmList, favoriteList, searchValue, logged} = this.props;
+        const { filmList, searchValue, logged} = this.props;
         return filmList.length !== 0
         ?  <div className="container container__film">  
                 <ul className="row list__names">{
@@ -22,7 +23,7 @@ class Collection extends Component {
                                     <Card 
                                         film={film} 
                                         favoriteHandler={this.state.favoriteHandler}
-                                        favoriteList={favoriteList}
+                                        favoriteList={this.state.favoriteList}
                                         logged={logged}
                                     />
                                 </li>

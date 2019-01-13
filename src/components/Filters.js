@@ -9,7 +9,7 @@ class Filters extends Component {
         } = this.props;
 
         return (
-            <div className="container__filter">
+            <div className="d-flex justify-content-center container__filter">
                 <input
                     id="filmSearch"
                     type="text"
