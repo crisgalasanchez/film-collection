@@ -26,8 +26,6 @@ class App extends Component {
     this.updateLoginState = this.updateLoginState.bind(this);
   }
 
-  // Rescatar datos de LS (si hay) o preparar llamada a la API
-
   componentDidMount() { 
     //users to mock sessionStorage
     sessionStorage.setItem('users', JSON.stringify({

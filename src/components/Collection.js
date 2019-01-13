@@ -29,7 +29,7 @@ class Collection extends Component {
                                 </li>
                             );
                         })
-                }
+                    }
                 </ul>
             </div>
         : <NoFilms searchValue = {searchValue}/> 

@@ -19,7 +19,7 @@
 }
 .input__login{
   &:focus {
-    border-color: #aba9a9;
+    border-color: $colorFocus;
     box-shadow: 0 0 0 0.2rem rgba(232, 62, 62, 0.25);
   }
 }
