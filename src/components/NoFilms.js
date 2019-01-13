@@ -4,7 +4,7 @@ import NoFilm from '../images/nofilm.jpg';
 class NoFilms extends Component {
     render() { 
         return ( 
-            <div className="card bg-dark text-white mx-5 main">
+            <div className="card bg-dark text-white m-5">
                 <img className="card-img rounded"
                     src={NoFilm} 
                     alt="No films to show"/>

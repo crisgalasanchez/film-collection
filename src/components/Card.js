@@ -8,10 +8,12 @@ class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            logged: this.props.logged
         };
         this.changeFavorite = this.changeFavorite.bind(this);
         this.isFavorite = this.isFavorite.bind(this);
         this.existsPoster = this.existsPoster.bind(this);
+        this.isLogged = this.isLogged.bind(this);
     }
     changeFavorite(e){
         if(e.target.classList.contains('active')) {
@@ -40,10 +42,19 @@ class Card extends Component {
             return film.Poster;
         }
     }
+    isLogged(){
+        let cssClass = 'd-block';
+        if(!this.props.logged){
+            cssClass = 'd-none';
+        }
+        return cssClass;
+    }
+    
     render() {
         const {film} = this.props;
         let poster = this.existsPoster();
         let favoriteClass = this.isFavorite();
+        let displayLogged = this.isLogged();
         return (
             <Fragment>
                 <div className='p-2 container__card mx-3'>
@@ -51,9 +62,9 @@ class Card extends Component {
                     <div className=' card-body'>
                         <h5 className='card-title'>{film.Title}</h5>
                     </div>
-                    <div className='container__link'>
+                    <div className='d-flex justify-content-between'>
+                        <button value={film.imdbID} className={'action-button ' + favoriteClass + displayLogged} onClick={this.changeFavorite}>♥</button>
                         <Link to={'/film/'+film.imdbID}><img className='icon__link' src={MoreInfo} alt="more info" /></Link>
-                        <button value={film.imdbID} className={'action-button ' + favoriteClass} onClick={this.changeFavorite}>♥</button>
                     </div>
                 </div>
             </Fragment>

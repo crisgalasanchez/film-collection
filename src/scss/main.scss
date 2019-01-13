@@ -79,10 +79,10 @@ ul{
   position: fixed;
   top: 0;
   left: 0;
-  padding: 15px 15px 0px 15px;
+  padding-top: 15px;
   z-index: 2;
   @media all and (min-width: 770px){
-    padding: 15px;
+    padding: 15px 15px 0px 15px;
   }
 }
 .main__title{
@@ -99,14 +99,18 @@ ul{
   }
 }
 .main{
-  margin-top: 200px;
-  @media all and (min-width: 770px){
-    margin-top: 150px;
+  margin-top: 220px;
+  @media all and (min-width: 570px){
+    margin-top: 180px;
+  }
+  @media all and (min-width: 768px){
+    margin-top: 135px;
   }
 }
 .icon__film{
   width: 70px;
 }
+
 //nav
 .users{
   display: none;
@@ -132,11 +136,6 @@ ul{
     -o-transition: all 0.5s ease;
     transition: all 0.3s ease;
   } 
-}
-
-.container__link {
-  display: flex;
-  justify-content: space-between; 
 }
 
 .icon__link {

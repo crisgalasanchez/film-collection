@@ -25,18 +25,17 @@ class App extends Component {
     this.removeInLocalStorage = this.removeInLocalStorage.bind(this);
     this.updateLoginState = this.updateLoginState.bind(this);
   }
-  
-  componentWillMount() { 
+
+  // Rescatar datos de LS (si hay) o preparar llamada a la API
+
+  componentDidMount() { 
     //users to mock sessionStorage
     sessionStorage.setItem('users', JSON.stringify({
       'lola@gmail.com':'lola',
       'maria@gmail.com':'maria',
       'ana@gmail.com':'ana'
     }));
-  };
-  // Rescatar datos de LS (si hay) o preparar llamada a la API
-
-  componentDidMount() { 
+    //recover favorite from the localStorage
     let user = sessionStorage.getItem('userLogged');
     const listFromLocalStorage = JSON.parse(localStorage.getItem(user));
     if (listFromLocalStorage !==  null) {
@@ -76,7 +75,11 @@ class App extends Component {
         }
       });
     }
-    //localStorage.setItem("favorite-list", JSON.stringify(this.state.filmList));
+    let user = sessionStorage.getItem('userLogged');
+    let list = JSON.parse(localStorage.getItem(user));
+    this.setState({
+      favoriteList : list
+    });
   }
 
   addInLocalStorage(film){
@@ -87,7 +90,9 @@ class App extends Component {
     }else{
       list = [];
     }
-    list.push(film);
+    if (!list.some(e => e.imdbID === film.imdbID)) {
+      list.push(film);
+    }
     localStorage.setItem(user, JSON.stringify(list));
   }
  
@@ -102,27 +107,14 @@ class App extends Component {
     localStorage.setItem(user, JSON.stringify(list));
   }
 
-  updateLoginState(state){
-    if(this.logged != state){
+  updateLoginState(newStateLogged){
+    if(this.state.logged !== newStateLogged){
       this.setState({
-        logged : state
+        logged : newStateLogged
       });
     }
   }
 
-  /* // select the correct list
-  selectListToPrint() {
-    const { favoriteList, filmList, searchValue } = this.state;
-    return !searchValue ? filmList : favoriteList;
-  } 
- // this.props.isFavorite?" active":""
- createArray(filmData){
-  const { counter, filmList } = this.state;
-  filmList[counter] = filmData;
-  this.saveDataInLocalStorage(filmList);
-}
-
- */
   //Input value event and filter favorite
   handleSearch(e) {
     let search = e.target.value.toLowerCase();
@@ -151,7 +143,7 @@ class App extends Component {
                 filmList={this.state.filmList}
                 favoriteHandler={this.updateLocalStorage}
                 favoriteList={this.state.favoriteList}
-                />
+                logged={this.state.logged}/>
               </div>
             : <div>
                 <Header updateLoginState={this.updateLoginState}/> 
@@ -173,7 +165,7 @@ class App extends Component {
                  filmList={this.state.favoriteList}
                  favoriteHandler={this.updateLocalStorage}
                  favoriteList={this.state.favoriteList}
-                /> 
+                 logged={this.state.logged}/> 
               </div>
             : <div>
                 <Header updateLoginState={this.updateLoginState}/> 
