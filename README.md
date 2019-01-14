@@ -1,6 +1,6 @@
 <a href="https://reactjs.org/"><img src="/logo.png" title="React" alt="React"></a>
 
-# ![React]
+# React
 
 
 ##  Description

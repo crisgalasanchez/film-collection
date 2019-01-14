@@ -132,7 +132,9 @@ class App extends Component {
           render={() => { 
             return this.state.filmList.length !== 0
             ? <div>
-              <Header updateLoginState={this.updateLoginState}/> 
+              <Header 
+                updateLoginState={this.updateLoginState}
+                logged={this.state.logged}/> 
               <Nav/> 
               <Filters 
                 handleSearch={this.handleSearch}
@@ -144,7 +146,9 @@ class App extends Component {
                 logged={this.state.logged}/>
               </div>
             : <div>
-                <Header updateLoginState={this.updateLoginState}/> 
+                <Header 
+                  updateLoginState={this.updateLoginState}
+                  logged={this.state.logged}/> 
                 <Nav/> 
                 <Filters 
                     handleSearch={this.handleSearch}
@@ -157,7 +161,9 @@ class App extends Component {
           render={() => { 
             return this.state.favoriteList.length !== 0
             ? <div>
-              <Header updateLoginState={this.updateLoginState}/> 
+              <Header 
+                updateLoginState={this.updateLoginState}
+                logged={this.state.logged}/> 
               <Nav/> 
               <Collection
                  filmList={this.state.favoriteList}
@@ -166,7 +172,9 @@ class App extends Component {
                  logged={this.state.logged}/> 
               </div>
             : <div>
-                <Header updateLoginState={this.updateLoginState}/> 
+                <Header 
+                  updateLoginState={this.updateLoginState}
+                  logged={this.state.logged}/> 
                 <Nav/> 
                 <NoFilms/> 
               </div>

@@ -63,7 +63,7 @@ class Card extends Component {
                         <h5 className='card-title'>{film.Title}</h5>
                     </div>
                     <div className='d-flex justify-content-between'>
-                        <button value={film.imdbID} className={'action-button ' + favoriteClass + displayLogged} onClick={this.changeFavorite}>♥</button>
+                        <button value={film.imdbID} className={'action-button ' + favoriteClass + ' ' + displayLogged} onClick={this.changeFavorite}>♥</button>
                         <Link to={'/film/'+film.imdbID}><img className='icon__link' src={MoreInfo} alt="more info" /></Link>
                     </div>
                 </div>

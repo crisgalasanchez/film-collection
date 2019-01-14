@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 
 class Filters extends Component {
     render() {
-        const {
-            handleSearch,
-            searchValue,
-        } = this.props;
+        const {handleSearch,searchValue} = this.props;
 
         return (
             <div className="d-flex justify-content-center container__filter">
