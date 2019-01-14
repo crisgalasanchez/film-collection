@@ -14,7 +14,7 @@ class Info extends Component {
    
     componentDidMount() { 
         let id = this.props.match.params.imdbID;
-        const URL = 'http://www.omdbapi.com/?apikey=f12ba140&i=';
+        const URL = 'https://www.omdbapi.com/?apikey=f12ba140&i=';
         fetch(`${URL}${id}`)
         .then(response => response.json())
         .then(json => {

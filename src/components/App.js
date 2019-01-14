@@ -44,7 +44,7 @@ class App extends Component {
   };
   
   callApi(search) {
-    const URL = 'http://www.omdbapi.com/?apikey=f12ba140&s=';
+    const URL = 'https://www.omdbapi.com/?apikey=f12ba140&s=';
     fetch(`${URL}${search}&type=movie`)
       .then(response => response.json())
       .then(json => {
